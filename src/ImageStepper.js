@@ -1,24 +1,16 @@
 import React from 'react'
-
-// let imgArr = ['image-1', 'image-2', 'image-3']
-// let stepperContent = ['content of first', 'content of second', 'content of third']
-let contentArr = [
-	{id: 1, img: 'Image-1', content: 'this is content for ist'},
-	{id: 2, img: 'Image-2', content: 'this is content for second'},
-	{id: 3, img: 'Image-3', content: 'this is content for third'},
-]
+import './imageStepper.css'
 
 
-export default function ImageStepper() {
+export default function ImageStepper({content, timer}) {
 	let [state, setState] = React.useState(1)
-	let timerRef = React.useRef()
 
 	React.useEffect(() => {
 		let timerId = setTimeout(() => {
-			timerRef.current = setState((prev => {
-				return (prev === contentArr.length) ? 1 : (prev + 1)
+			 setState((prev => {
+				return (prev === content.length) ? 1 : (prev + 1)
 			}))
-		}, 5000);
+		}, timer);
 
 		return () => clearTimeout(timerId)
 
@@ -27,17 +19,17 @@ export default function ImageStepper() {
 	
 
 	return (
-		<div className='container'>
-			<div>
-				{contentArr.map(({id, img}) => {
+		<div className='imageStepper__container'>
+			<div className='images__container'>
+				{content.map(({id, img}) => {
 					return (
-					<div key={id} style={{visibility: (id===state) ? 'visible' : 'hidden'}}>
+					<div className='image' key={id} style={{visibility: (id===state) ? 'visible' : 'hidden'}}>
 						<p>{img}</p>
 					</div>
 				)})}
 			</div>
 			<div>
-				{contentArr.map(({id, content}) => {
+				{content.map(({id, content}) => {
 					return (
 					<div key={id}>
 						<p onClick={() => setState(id)} style={{fontWeight: (id===state) ? 'bold' : 'normal'}}>{content }</p>

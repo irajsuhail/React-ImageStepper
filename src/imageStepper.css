@@ -1,0 +1,15 @@
+.imageStepper__container {
+	display: flex;
+}
+
+.imageStepper__container .images__container {
+	width: 50%;
+	position: relative;
+}
+
+.imageStepper__container .images__container .image {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
