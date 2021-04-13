@@ -11,13 +11,16 @@ let contentArr = [
 
 export default function ImageStepper() {
 	let [state, setState] = React.useState(1)
+	let timerRef = React.useRef()
 
 	React.useEffect(() => {
-		setTimeout(() => {
-			setState((prev => {
+		let timerId = setTimeout(() => {
+			timerRef.current = setState((prev => {
 				return (prev === contentArr.length) ? 1 : (prev + 1)
 			}))
 		}, 5000);
+
+		return () => clearTimeout(timerId)
 
 	}, [state])
 	
